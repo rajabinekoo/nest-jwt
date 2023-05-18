@@ -8,10 +8,11 @@ import {
   Post,
   UseInterceptors,
 } from '@nestjs/common';
-import { CreateUserDto, SigninBodyDto, SigninDto } from 'src/user/user.dto';
+import { CreateUserDto } from 'src/user/user.dto';
 import { UserEntity } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { AuthService } from './auth.service';
+import { SigninBodyDto, SigninDto } from './auth.dto';
 
 @Controller('auth')
 @UseInterceptors(ClassSerializerInterceptor)

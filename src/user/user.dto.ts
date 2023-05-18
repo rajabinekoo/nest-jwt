@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { Request } from 'express';
 import { UserEntity } from './user.entity';
 
 export class CreateUserDto {
@@ -19,30 +20,22 @@ export class CreateUserDto {
   password: string;
 }
 
-export class SigninBodyDto {
-  @IsString()
-  @IsNotEmpty()
-  credential: string;
-
-  @IsString()
-  @IsNotEmpty()
-  password: string;
+export class UserRequest extends Request {
+  userId: number;
+  // user: UserEntity;
 }
 
-export class SigninDto {
+export class UserDto {
   id: number;
 
   username: string;
 
   email: string;
 
-  access_token: string;
-
   @Exclude()
   password: string;
 
-  constructor(partial: Partial<UserEntity>, token: string) {
+  constructor(partial: Partial<UserEntity>) {
     Object.assign(this, partial);
-    this.access_token = token;
   }
 }
