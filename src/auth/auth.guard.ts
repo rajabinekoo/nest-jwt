@@ -8,10 +8,11 @@ import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { jwtSecret } from 'src/config';
 import { JwtPayload } from './auth.dto';
+import { Reflector } from '@nestjs/core';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(private jwtService: JwtService, private reflector: Reflector) {}
 
   //   constructor(
   //     private jwtService: JwtService,
@@ -19,8 +20,6 @@ export class AuthGuard implements CanActivate {
   //   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    console.log(context);
-
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
     if (!token) {

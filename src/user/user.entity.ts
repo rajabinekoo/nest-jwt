@@ -13,4 +13,7 @@ export class UserEntity {
 
   @Column({ unique: true })
   email: string;
+
+  @Column({ default: 'user' })
+  role: string;
 }
